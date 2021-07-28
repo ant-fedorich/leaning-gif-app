@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.myprojects.gifapp.R
+import com.myprojects.gifapp.data.entity.GifData
+import com.myprojects.gifapp.data.entity.GifEntityResponse
 import com.myprojects.gifapp.data.model.GifItem
 import com.myprojects.gifapp.databinding.FragmentHomeBinding
 import com.myprojects.gifapp.ui.adapter.GifListAdapter
@@ -17,7 +19,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding by viewBinding(FragmentHomeBinding::bind)
     private val viewmodel by viewModel<SearchViewModel>()
 
-    private var gifList = listOf<GifItem>()
+    private var gifList = listOf<GifData>()
     private val gifAdapter = GifListAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
