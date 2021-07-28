@@ -1,9 +1,8 @@
 package com.myprojects.gifapp.repository
 
-import com.myprojects.gifapp.data.entity.GifData
-import com.myprojects.gifapp.data.entity.GifEntityResponse
 import com.myprojects.gifapp.data.model.GifItem
+import com.myprojects.gifapp.states.DataState
 
 interface ISearchRepository {
-    suspend fun getGifListViaSearch(searchString: String): List<GifData>
+    suspend fun getGifListViaSearch(searchString: String): DataState<List<GifItem>>
 }

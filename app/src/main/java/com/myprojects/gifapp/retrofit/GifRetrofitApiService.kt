@@ -1,7 +1,6 @@
 package com.myprojects.gifapp.retrofit
 
 import com.giphy.sdk.ui.GIPHY_GIF_LINK
-import com.myprojects.gifapp.data.entity.GifData
 import com.myprojects.gifapp.data.entity.GifEntityResponse
 import com.myprojects.gifapp.util.AppConsts.GIPHY_API_KEY
 import retrofit2.http.GET

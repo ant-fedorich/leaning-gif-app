@@ -15,13 +15,29 @@
         android:background="@color/app_search_bar_background"
         android:drawableEnd="@drawable/ic_search"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:hint="Type to search GIF"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
         android:padding="8dp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Name" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerSearchResult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editGifSearch"
+        tools:text="You have no result found" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerSearchResult"
@@ -36,13 +52,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editGifSearch"
         app:spanCount="4"
-        tools:listitem="@layout/item_searched_gif" />
+        tools:listitem="@layout/item_searched_gif">
 
-    <Button
-        android:id="@+id/buttonSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editGifSearch" />
+    </androidx.recyclerview.widget.RecyclerView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

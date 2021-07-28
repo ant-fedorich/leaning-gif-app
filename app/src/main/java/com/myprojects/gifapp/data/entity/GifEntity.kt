@@ -2,22 +2,13 @@ package com.myprojects.gifapp.data.entity
 
 import com.google.gson.annotations.SerializedName
 
-//data class GifEntity (
-//    @SerializedName("")
-//    val id: String,
-//    val url: String
-//)
-
-
-
-
 data class GifEntityResponse (
-    val data: List<GifData>,
-    val meta: Meta,
-    val pagination: Pagination
+    val data: List<GifDataResponse>,
+    val meta: MetaResponse,
+    val pagination: PaginationResponse
 )
 
-data class GifData (
+data class GifDataResponse (
     val type: String,
     val id: String,
     val slug: String,
@@ -42,42 +33,42 @@ data class GifData (
     val importDatetime: String,
     @SerializedName("trending_datetime")
     val trendingDatetime: String,
-    val images: ImagesSet,
+    val images: ImagesSetResponse,
     val title: String
 )
 
-data class ImagesSet (
+data class ImagesSetResponse (
     @SerializedName("fixed_height")
-    val fixedHeight: ImageItem,
+    val fixedHeight: ImageResponse,
     @SerializedName("fixed_height_still")
-    val fixedHeightStill: ImageItem,
+    val fixedHeightStill: ImageResponse,
     @SerializedName("fixed_height_downsampled")
-    val fixedHeightDownsampled: ImageItem,
+    val fixedHeightDownsampled: ImageResponse,
     @SerializedName("fixed_width")
-    val fixedWidth: ImageItem,
+    val fixedWidth: ImageResponse,
     @SerializedName("fixed_width_still")
-    val fixedWidthStill: ImageItem,
+    val fixedWidthStill: ImageResponse,
     @SerializedName("fixed_width_downsampled")
-    val fixedWidthDownsampled: ImageItem,
+    val fixedWidthDownsampled: ImageResponse,
     @SerializedName("fixed_height_small")
-    val fixedHeightSmall: ImageItem,
+    val fixedHeightSmall: ImageResponse,
     @SerializedName("fixed_height_small_still")
-    val fixedHeightSmallStill: ImageItem,
+    val fixedHeightSmallStill: ImageResponse,
     @SerializedName("fixed_width_small")
-    val fixedWidthSmall: ImageItem,
+    val fixedWidthSmall: ImageResponse,
     @SerializedName("fixed_width_small_still")
-    val fixedWidthSmallStill: ImageItem,
-    val downsized: ImageItem,
+    val fixedWidthSmallStill: ImageResponse,
+    val downsized: ImageResponse,
     @SerializedName("downsized_still")
-    val downsizedStill: ImageItem,
+    val downsizedStill: ImageResponse,
     @SerializedName("downsized_large")
-    val downsizedLarge: ImageItem,
-    val original: ImageItem,
+    val downsizedLarge: ImageResponse,
+    val original: ImageResponse,
     @SerializedName("original_still")
-    val originalStill: ImageItem
+    val originalStill: ImageResponse
 )
 
-data class ImageItem (
+data class ImageResponse (
     val url: String,
     val width: String,
     val height: String,
@@ -91,14 +82,14 @@ data class ImageItem (
     val frames: String? = null
 )
 
-data class Meta (
-    val status: Long,
+data class MetaResponse (
+    val status: Int,
     val msg: String
 )
 
-data class Pagination (
+data class PaginationResponse (
     @SerializedName("total_count")
-    val totalCount: Long,
-    val count: Long,
-    val offset: Long
+    val totalCount: Int,
+    val count: Int,
+    val offset: Int
 )

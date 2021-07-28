@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">GifApp</string>
+    <string name="app_name">Gif App</string>
+    <string name="no_result_found">You have no result found</string>
+    <string name="server_error">Server error: $1%s</string>
 </resources>

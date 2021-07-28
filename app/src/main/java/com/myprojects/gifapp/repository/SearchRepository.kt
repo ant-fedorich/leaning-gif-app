@@ -1,65 +1,22 @@
 package com.myprojects.gifapp.repository
 
-import com.myprojects.gifapp.data.entity.GifData
-import com.myprojects.gifapp.data.entity.GifEntityResponse
+import com.myprojects.gifapp.data.mapper.mapToGifItem
 import com.myprojects.gifapp.data.model.GifItem
+import com.myprojects.gifapp.states.DataState
 import com.myprojects.gifapp.retrofit.GifRetrofitApiService
-import java.util.*
 
 class SearchRepository(
     private val service: GifRetrofitApiService
 ) : ISearchRepository {
 
-    private val gifList = listOf(
-        GifItem(
-            id = System.currentTimeMillis().toString(),
-            importDate = System.currentTimeMillis().toString(),
-            imageUrl = android.R.drawable.bottom_bar.toString()
-        ),
-        GifItem(
-            id = System.currentTimeMillis().toString(),
-            importDate = System.currentTimeMillis().toString(),
-            imageUrl = android.R.drawable.alert_light_frame.toString()
-        ),
-        GifItem(
-            id = System.currentTimeMillis().toString(),
-            importDate = System.currentTimeMillis().toString(),
-            imageUrl = android.R.drawable.dialog_frame.toString()
-        ),
-        GifItem(
-            id = System.currentTimeMillis().toString(),
-            importDate = System.currentTimeMillis().toString(),
-            imageUrl = android.R.drawable.bottom_bar.toString()
-        ),
-        GifItem(
-            id = System.currentTimeMillis().toString(),
-            importDate = System.currentTimeMillis().toString(),
-            imageUrl = android.R.drawable.alert_light_frame.toString()
-        ),
-        GifItem(
-            id = System.currentTimeMillis().toString(),
-            importDate = System.currentTimeMillis().toString(),
-            imageUrl = android.R.drawable.dialog_frame.toString()
-        ),
-        GifItem(
-            id = System.currentTimeMillis().toString(),
-            importDate = System.currentTimeMillis().toString(),
-            imageUrl = android.R.drawable.bottom_bar.toString()
-        ),
-        GifItem(
-            id = System.currentTimeMillis().toString(),
-            importDate = System.currentTimeMillis().toString(),
-            imageUrl = android.R.drawable.alert_light_frame.toString()
-        ),
-        GifItem(
-            id = System.currentTimeMillis().toString(),
-            importDate = System.currentTimeMillis().toString(),
-            imageUrl = android.R.drawable.dialog_frame.toString()
-        )
-    )
-
-    override suspend fun getGifListViaSearch(searchString: String): List<GifData> {
+    override suspend fun getGifListViaSearch(searchString: String): DataState<List<GifItem>> {
         val response = service.getGifListViaSearch(searchString, 30)
-        return response.data
+        if (response.meta.status != 200) {
+            return DataState.Failure(response.meta.msg)
+        }
+        if (response.data.isNullOrEmpty()) {
+            return DataState.EmptyResult
+        }
+        return DataState.Success(response.data.map { it.mapToGifItem() })
     }
 }
