@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -46,21 +47,30 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun subscribeObservers() {
         viewmodel.gifList.observe(viewLifecycleOwner) { state ->
-            when(state) {
-                is DataState.Success -> {
-                    gifList = state.data
-                    gifAdapter.submitList(state.data)
-                    binding.textMessage.isGone = true
-                }
-                is DataState.EmptyResult -> {
-                    binding.textMessage.isVisible = true
-                    binding.textMessage.text = getString(R.string.no_result_found)
-                    gifAdapter.submitList(emptyList())
-                }
-                is DataState.Failure -> {
-                    binding.textMessage.isVisible = true
-                    binding.textMessage.text = getString(R.string.server_error, state.error)
-                    gifAdapter.submitList(emptyList())
+            binding.apply {
+                when(state) {
+                    is DataState.Success -> {
+                        progressSearch.isInvisible = true
+                        textMessage.isGone = true
+                        gifList = state.data
+                        gifAdapter.submitList(state.data)
+                    }
+                    is DataState.EmptyResult -> {
+                        progressSearch.isInvisible = true
+                        textMessage.isVisible = true
+                        textMessage.text = getString(R.string.no_result_found)
+                        gifAdapter.submitList(emptyList())
+                    }
+                    is DataState.Loading -> {
+                        progressSearch.isInvisible = false
+                        textMessage.isGone = true
+                    }
+                    is DataState.Failure -> {
+                        progressSearch.isInvisible = true
+                        textMessage.isVisible = true
+                        textMessage.text = getString(R.string.server_error, state.error)
+                        gifAdapter.submitList(emptyList())
+                    }
                 }
             }
         }

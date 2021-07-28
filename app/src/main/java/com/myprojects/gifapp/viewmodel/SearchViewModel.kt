@@ -18,6 +18,7 @@ class SearchViewModel(
     val gifList: LiveData<DataState<List<GifItem>>> = _gifList
 
     fun getGifListViaSearch(searchString: String) = viewModelScope.launch(IO) {
+        _gifList.postValue(DataState.Loading)
         _gifList.postValue(searchRepo.getGifListViaSearch(searchString))
     }
 }
