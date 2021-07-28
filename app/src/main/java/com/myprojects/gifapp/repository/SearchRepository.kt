@@ -8,9 +8,10 @@ import com.myprojects.gifapp.retrofit.GifRetrofitApiService
 class SearchRepository(
     private val service: GifRetrofitApiService
 ) : ISearchRepository {
+    private val searchLimit = 30
 
     override suspend fun getGifListViaSearch(searchString: String): DataState<List<GifItem>> {
-        val response = service.getGifListViaSearch(searchString, 30)
+        val response = service.getGifListViaSearch(searchString, searchLimit)
         if (response.meta.status != 200) {
             return DataState.Failure(response.meta.msg)
         }

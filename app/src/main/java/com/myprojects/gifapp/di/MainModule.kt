@@ -14,6 +14,4 @@ val mainModule = module {
     single<ISearchRepository> { SearchRepository(get())}
 
     viewModel { SearchViewModel(get()) }
-
-
 }

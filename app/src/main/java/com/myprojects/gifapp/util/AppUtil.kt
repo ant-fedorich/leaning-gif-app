@@ -19,9 +19,9 @@ object AppUtil {
     fun ImageView.loadImage(imageUrl: String) {
         Glide.with(this)
             .load(imageUrl)
+            .override(300)
             .placeholder(R.drawable.ic_image_placeholder)
             .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-            .signature(ObjectKey(System.currentTimeMillis()))
             .into(this)
     }
 }

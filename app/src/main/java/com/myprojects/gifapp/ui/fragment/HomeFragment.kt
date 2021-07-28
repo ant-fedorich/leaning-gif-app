@@ -9,6 +9,7 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.myprojects.gifapp.R
 import com.myprojects.gifapp.data.model.GifItem
 import com.myprojects.gifapp.states.DataState
@@ -31,18 +32,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         subscribeObservers()
         setListeners()
         setupRecyclerView()
-    }
-
-    private fun setListeners() = binding.apply {
-        editGifSearch.setOnEditorActionListener { textView, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                if(Build.VERSION.SDK_INT >= 23) {
-                    viewmodel.getGifListViaSearch(editGifSearch.text.toString())
-                    hideKeyboard(requireActivity())
-                }
-            }
-            false
-        }
     }
 
     private fun subscribeObservers() {
@@ -76,10 +65,23 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    private fun setListeners() = binding.apply {
+        editGifSearch.setOnEditorActionListener { textView, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                if(Build.VERSION.SDK_INT >= 23) {
+                    viewmodel.getGifListViaSearch(editGifSearch.text.toString())
+                    hideKeyboard(requireActivity())
+                }
+            }
+            false
+        }
+    }
+
     private fun setupRecyclerView() {
         binding.recyclerSearchResult.apply {
             adapter = gifAdapter
-            layoutManager = GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
+            //layoutManager = GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
+            layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         }
     }
 }

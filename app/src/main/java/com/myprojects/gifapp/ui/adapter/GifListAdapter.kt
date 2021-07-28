@@ -25,7 +25,6 @@ class GifListAdapter : ListAdapter<GifItem, GifListAdapter.GifViewHolder>(GifDif
 
 }
 
-
 class GifDiffUtil : DiffUtil.ItemCallback<GifItem>() {
     override fun areItemsTheSame(oldItem: GifItem, newItem: GifItem) = oldItem.id == newItem.id
     override fun areContentsTheSame(oldItem: GifItem, newItem: GifItem) = oldItem == newItem
